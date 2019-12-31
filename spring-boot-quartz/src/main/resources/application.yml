@@ -1,0 +1,54 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /quartz
+spring:
+  thymeleaf:
+    mode: HTML
+    cache: false
+  #连接池配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    name: ownDataSource
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://148.70.34.49:3306/tbl_quartz_job?useSSL=false&useUnicode=true
+      username: root
+      password: 123456
+      initial-size: 1                     #连接池初始大小
+      max-active: 20                      #连接池中最大的活跃连接数
+      min-idle: 1                         #连接池中最小的活跃连接数
+      max-wait: 60000                     #配置获取连接等待超时的时间
+      pool-prepared-statements: true    #打开PSCache，并且指定每个连接上PSCache的大小
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      validation-query-timeout: 30000
+      test-on-borrow: false             #是否在获得连接后检测其可用性
+      test-on-return: false             #是否在连接放回连接池后检测其可用性
+      test-while-idle: true             #是否在连接空闲一段时间后检测其可用性
+  quartz:
+    #相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: quartzScheduler
+            instanceId: AUTO
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 100       #线程池初始量
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+#mybatis配置
+mybatis:
+  type-aliases-package: com.wulang.quartz.entity
+  mapper-locations: classpath:mybatis/mapper/*.xml
+#分页配置, pageHelper是物理分页插件
+pagehelper:
+  #4.0.0以后版本可以不设置该参数，该示例中是5.1.4
+  helper-dialect: mysql
+  #启用合理化，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
+  reasonable: true
+logging:
+  level:
+    com.lee.quartz.mapper: debug

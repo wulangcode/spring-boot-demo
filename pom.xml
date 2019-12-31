@@ -15,6 +15,7 @@
       <module>spring-boot-redis-sentinel</module>
       <module>spring-boot-redis-cluster</module>
       <module>spring-boot-redis-lettuce</module>
+      <module>spring-boot-quartz</module>
     </modules>
 
     <name>wulang-boot-demo</name>

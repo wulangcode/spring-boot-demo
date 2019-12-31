@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wulang.quartz.mapper.JobMapper">
+
+    <resultMap id="QuartzJobMap" type="QuartzJob">
+        <result property="jobName" column="job_name"/>
+        <result property="jobGroup" column="job_group"/>
+        <result property="jobClassName" column="job_class_name"/>
+        <result property="cronExpression" column="cron_expression"/>
+        <result property="triggerState" column="trigger_state"/>
+        <result property="oldJobName" column="old_job_name"/>
+        <result property="oldJobGroup" column="old_job_group"/>
+    </resultMap>
+
+    <select id="listJob" resultMap="QuartzJobMap">
+        SELECT
+          id,job_name,job_group,job_class_name,cron_expression,trigger_state,old_job_name,old_job_group,description
+        FROM
+          tbl_quartz_job
+        <if test="jobName != '' and jobName != null">
+            WHERE job_name LIKE CONCAT(CONCAT('%',#{jobName}),'%')
+        </if>
+    </select>
+
+    <select id="getJob" resultMap="QuartzJobMap">
+        SELECT
+          id,job_name,job_group,job_class_name,cron_expression,trigger_state,old_job_name,old_job_group,description
+        FROM
+          tbl_quartz_job
+        WHERE
+          job_group = #{jobGroup} AND job_name = #{jobName}
+    </select>
+
+    <insert id="saveJob" parameterType="QuartzJob">
+        INSERT INTO
+          tbl_quartz_job(job_name,job_group,job_class_name,cron_expression,trigger_state,old_job_name,old_job_group,description,job_parameter)
+        VALUES
+          (#{jobName},#{jobGroup},#{jobClassName},#{cronExpression},#{triggerState},#{oldJobName},#{oldJobGroup},#{description},#{jobParameter})
+    </insert>
+
+    <update id="updateJobStatus" parameterType="String">
+        UPDATE
+          tbl_quartz_job
+        SET
+          trigger_state = #{status}
+        WHERE
+          job_group = #{jobGroup} AND job_name = #{jobName}
+    </update>
+
+    <delete id="removeQuartzJob" parameterType="String">
+        DELETE FROM
+          tbl_quartz_job
+        WHERE
+          job_group = #{jobGroup} AND job_name = #{jobName}
+    </delete>
+
+    <update id="updateJob" parameterType="QuartzJob">
+        UPDATE
+          tbl_quartz_job
+        <set>
+            <if test="jobName != null"> job_name = #{jobName}, </if>
+            <if test="jobGroup != null"> job_group = #{jobGroup}, </if>
+            <if test="jobClassName != null"> job_class_name = #{jobClassName}, </if>
+            <if test="cronExpression != null"> cron_expression = #{cronExpression}, </if>
+            <if test="triggerState != null"> trigger_state = #{triggerState}, </if>
+            <if test="oldJobName != null"> old_job_name = #{oldJobName}, </if>
+            <if test="oldJobGroup != null"> old_job_group = #{oldJobGroup}, </if>
+            <if test="description != null"> description = #{description}, </if>
+        </set>
+        WHERE
+          id = #{id}
+    </update>
+</mapper>
