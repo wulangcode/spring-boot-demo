@@ -13,6 +13,7 @@
       <module>spring-boot-multi-datasource-mybatis</module>
       <module>spring-boot-redis</module>
       <module>spring-boot-redis-sentinel</module>
+      <module>spring-boot-redis-cluster</module>
     </modules>
 
     <name>wulang-boot-demo</name>
