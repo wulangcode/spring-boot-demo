@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "lettuce.single",
+      "type": "club.throwable.spring.lettuce.LettuceSingleProperties",
+      "description": "单机配置",
+      "sourceType": "club.throwable.spring.lettuce.LettuceProperties"
+    },
+    {
+      "name": "lettuce.replica",
+      "type": "club.throwable.spring.lettuce.LettuceReplicaProperties",
+      "description": "主从配置",
+      "sourceType": "club.throwable.spring.lettuce.LettuceProperties"
+    },
+    {
+      "name": "lettuce.sentinel",
+      "type": "club.throwable.spring.lettuce.LettuceSentinelProperties",
+      "description": "哨兵配置",
+      "sourceType": "club.throwable.spring.lettuce.LettuceProperties"
+    },
+    {
+      "name": "lettuce.single",
+      "type": "club.throwable.spring.lettuce.LettuceClusterProperties",
+      "description": "集群配置",
+      "sourceType": "club.throwable.spring.lettuce.LettuceProperties"
+    }
+  ]
+}
