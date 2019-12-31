@@ -16,6 +16,7 @@
       <module>spring-boot-redis-cluster</module>
       <module>spring-boot-redis-lettuce</module>
       <module>spring-boot-quartz</module>
+      <module>spring-boot-rabbitmq-access</module>
     </modules>
 
     <name>wulang-boot-demo</name>
