@@ -8,79 +8,101 @@
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>boot-demo</artifactId>
+    <groupId>com.wulang.boot</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-boot-demo-websocket</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+  <artifactId>spring-boot-websocket-reamtime</artifactId>
 
-    <name>spring-boot-demo-websocket</name>
-    <description>Demo project for Spring Boot</description>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+  </properties>
 
-    <parent>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>spring-boot-demo</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <oshi.version>3.9.1</oshi.version>
-    </properties>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-websocket</artifactId>
+    </dependency>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
+    <dependency>
+      <groupId>com.github.oshi</groupId>
+      <artifactId>oshi-core</artifactId>
+      <version>3.9.1</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.0.0</version>
+    </dependency>
 
-        <dependency>
-            <groupId>com.github.oshi</groupId>
-            <artifactId>oshi-core</artifactId>
-            <version>${oshi.version}</version>
-        </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>28.1-jre</version>
+    </dependency>
 
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
+  <repositories>
+    <repository>
+      <id>nexus-aliyun</id>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </repository>
+  </repositories>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <finalName>spring-boot-demo-websocket</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.*</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
 </project>
 ```
 
@@ -115,7 +137,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 ### 1.3. 服务器相关实体
 
-> 此部分实体 参见包路径 [com.xkcoding.websocket.model](./src/main/java/com/xkcoding/websocket/model)
+> 此部分实体 参见包路径 [com.xkcoding.websocket.model](./src/main/java/com/wulang/websocket/model)
 
 ### 1.4. ServerTask.java
 
@@ -345,13 +367,13 @@ public class ServerTask {
 
 ## 3. 运行效果
 
-![image-20181217110240322](https://github.com/sanliangitch/SpringBootDemo/blob/master/spring-boot-quartz/spring-boot-quartz/potho/01.png)
+![image-20181217110240322](potho/01.png)
 
-![image-20181217110304065](https://github.com/sanliangitch/SpringBootDemo/blob/master/spring-boot-quartz/spring-boot-quartz/potho/02.png)
+![image-20181217110304065](potho/02.png)
 
-![image-20181217110328810](https://github.com/sanliangitch/SpringBootDemo/blob/master/spring-boot-quartz/spring-boot-quartz/potho/03.png)
+![image-20181217110328810](potho/03.png)
 
-![image-20181217110336017](https://github.com/sanliangitch/SpringBootDemo/blob/master/spring-boot-quartz/spring-boot-quartz/potho/04.png)
+![image-20181217110336017](potho/04.png)
 
 ## 4. 参考
 
