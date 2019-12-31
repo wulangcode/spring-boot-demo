@@ -22,8 +22,6 @@ spring boot demo 是一个用来深度学习并实战 spring boot 的项目，�
 
 ## 运行方式
 
-> 提示：如果是 fork 的朋友，同步代码的请参考：https://xkcoding.com/2018/09/18/how-to-update-the-fork-project.html
-
 1. `git clone https://github.com/sanliangitch/spring-boot-demo.git`
 2. 使用 IDEA 打开 clone 下来的项目
 3. 在 IDEA 中 Maven Projects 的面板导入项目根目录下 的 `pom.xml` 文件
@@ -53,4 +51,4 @@ spring boot demo 是一个用来深度学习并实战 spring boot 的项目，�
 | [spring-boot-websocket-reamtime](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-websocket-reamtime) | 此 demo 主要演示了 Spring Boot 如何集成 WebSocket，实现后端主动往前端推送数据。网上大部分websocket的例子都是聊天室，本例主要是推送服务器状态信息。前端页面基于vue和element-ui实现。                   |
 
 ## 联系方式(加好友，备注来源)
-![weix](https://github.com/sanliangitch/LeetCodeDemo/blob/master/src/main/resources/assets/vx.jpg)
+![weix](vx.jpg)
