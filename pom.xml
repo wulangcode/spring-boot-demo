@@ -12,6 +12,7 @@
         <module>spring-boot-batis-aop</module>
       <module>spring-boot-multi-datasource-mybatis</module>
       <module>spring-boot-redis</module>
+      <module>spring-boot-redis-sentinel</module>
     </modules>
 
     <name>wulang-boot-demo</name>
