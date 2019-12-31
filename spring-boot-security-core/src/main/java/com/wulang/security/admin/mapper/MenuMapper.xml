@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wulang.security.admin.dao.MenuDao">
+
+    <resultMap id="BaseResultMap" type="com.wulang.security.admin.entity.collection.Menu">
+        <id column="menu_id" property="menuId" jdbcType="INTEGER"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <collection property="roles" ofType="com.wulang.security.admin.entity.collection.Role">
+            <id column="rid" property="id"/>
+            <result column="role_name" property="roleName"/>
+            <result column="role" property="role"/>
+        </collection>
+        <collection property="children" ofType="com.wulang.security.admin.entity.collection.Menu">
+            <id column="id2" property="menuId"/>
+            <result column="path2" property="url" jdbcType="VARCHAR"/>
+                <result column="name2" property="name" jdbcType="VARCHAR"/>
+            <result column="iconCls2" property="icon" jdbcType="VARCHAR"/>
+            <association property="meta" javaType="com.wulang.security.admin.entity.collection.MenuMeta">
+                <result column="keepAlive2" property="keepAlive"/>
+                <result column="requireAuth2" property="requireAuth"/>
+            </association>
+            <collection property="children" ofType="com.wulang.security.admin.entity.collection.Menu">
+                <id column="id3" property="menuId"/>
+                <result column="name3" property="name" jdbcType="VARCHAR"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="getAllMenu" resultMap="BaseResultMap">
+        SELECT
+            m.*,
+            r.`id` AS rid,
+            r.`role_name`,
+            r.`role`
+        FROM
+            sys_menu m
+            LEFT JOIN sys_menu_role mr ON m.menu_id = mr.`menu_id`
+            LEFT JOIN role r ON mr.`role_id` = r.`id`
+        WHERE
+            m.`enabled` = TRUE
+        ORDER BY
+            m.`menu_id` DESC
+    </select>
+
+    <select id="listByRoleId" resultType="com.wulang.security.admin.entity.collection.Menu">
+        select * from sys_menu where menu_id in (
+                  select menu_id from sys_menu_role where role_id = #{roleId}
+                )
+    </select>
+</mapper>

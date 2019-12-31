@@ -18,6 +18,7 @@
       <module>spring-boot-quartz</module>
       <module>spring-boot-rabbitmq-access</module>
       <module>spring-boot-rabbitmq-availability</module>
+      <module>spring-boot-security-core</module>
     </modules>
 
     <name>wulang-boot-demo</name>
