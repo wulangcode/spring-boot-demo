@@ -29,5 +29,4 @@ public class RefreshRouteTask {
         RoutesRefreshedEvent routesRefreshedEvent = new RoutesRefreshedEvent(routeLocator);
         publisher.publishEvent(routesRefreshedEvent);
     }
-
 }

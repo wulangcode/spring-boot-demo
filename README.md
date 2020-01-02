@@ -49,6 +49,7 @@ spring boot demo 是一个用来深度学习并实战 spring boot 的项目，�
 | [spring-boot-roctetmq-demo](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-roctetmq-demo) | 项目中提供发送异步消息、广播消息、顺序消息、延时消息、过滤消息、事物消息等示例。适合平时工作中API调用时的参考代码。                   |
 | [spring-boot-roctetmq-shop-project](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-roctetmq-shop-project) | 模拟电商网站购物场景中的【下单】和【支付】业务，使用MQ保证在下单失败后系统数据的完整性，通过MQ进行数据分发，提高系统处理性能。项目中技术选型为SpringBoot、Dubbo、Zookeeper、RocketMQ、Mysql等。                   |
 | [spring-boot-websocket-reamtime](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-websocket-reamtime) | 此 demo 主要演示了 Spring Boot 如何集成 WebSocket，实现后端主动往前端推送数据。网上大部分websocket的例子都是聊天室，本例主要是推送服务器状态信息。前端页面基于vue和element-ui实现。                   |
+| [spring-boot-zuul](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-zuul) | 此 demo 主要演示了 Spring Boot 如何改进zuul网关，实现对 zuul 进行改造实现动态路由与灰度发布。是生产和企业中非常实用的功能。                   |
 
 ## 联系方式(加好友，备注来源)
 ![weix](vx.jpg)
