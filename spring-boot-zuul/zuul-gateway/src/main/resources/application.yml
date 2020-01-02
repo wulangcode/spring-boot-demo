@@ -1,0 +1,26 @@
+server:
+  port: 9000
+  
+spring:
+  application:
+    name: zuul-gateway
+  datasource:
+    url: jdbc:mysql://154.8.216.45:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registryFetchIntervalSeconds: 3
+    leaseRenewalIntervalInSeconds: 3
+      
+zuul:
+  retryable: true

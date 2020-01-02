@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>boot-demo</artifactId>
+    <groupId>com.wulang.boot</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>spring-boot-zuul</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+    <module>credit-api</module>
+    <module>credit-service</module>
+    <module>eureka-server</module>
+    <module>inventory-api</module>
+    <module>inventory-service</module>
+    <module>order-service</module>
+    <module>wms-api</module>
+    <module>wms-service</module>
+    <module>zuul-gateway</module>
+  </modules>
+
+
+</project>

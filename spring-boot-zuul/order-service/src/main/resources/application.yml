@@ -1,0 +1,18 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: order-service
+    
+eureka:
+  instance:
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 3
+#    在模块中加入这个表示是新起的服务
+    metadata-map:
+      version: new
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    registry-fetch-interval-seconds: 3

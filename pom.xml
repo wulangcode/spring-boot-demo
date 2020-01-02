@@ -23,6 +23,7 @@
       <module>spring-boot-websocket-reamtime</module>
       <module>spring-boot-roctetmq-demo</module>
       <module>spring-boot-roctetmq-shop-project</module>
+      <module>spring-boot-zuul</module>
     </modules>
 
     <name>wulang-boot-demo</name>

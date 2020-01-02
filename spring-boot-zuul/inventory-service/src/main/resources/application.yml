@@ -1,0 +1,13 @@
+server:
+  port: 8082
+  
+spring:
+  application:
+    name: inventory-service
+          
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8761/eureka

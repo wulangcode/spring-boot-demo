@@ -1,0 +1,13 @@
+server:
+  port: 8083
+  
+spring:
+  application:
+    name: wms-service
+          
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
