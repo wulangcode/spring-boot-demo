@@ -187,6 +187,53 @@ public class RefreshRouteTask {
     }
 }
 ```
+### 1.5. application.yml
+```java
+server:
+  port: 9000
+
+spring:
+  application:
+    name: zuul-gateway
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registryFetchIntervalSeconds: 3
+    leaseRenewalIntervalInSeconds: 3
+
+zuul:
+  retryable: true
+
+ribbon:
+#  饥饿加载
+  eager-load:
+    enabled: true
+#zuul请求一个订单服务，超过1秒就认为超时了，此时会先重试一下订单服务这台机器，如果还是不行就重试一下订单服务的其他机器
+  ConnectTimeout: 1000
+  ReadTimeout: 1000
+  OkToRetryOnAllOperations: true
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+```
+
 
 ## 2. 运行方式
 
