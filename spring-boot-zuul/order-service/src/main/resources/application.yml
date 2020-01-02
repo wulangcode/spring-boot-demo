@@ -1,18 +1,30 @@
 server:
-  port: 9091
+  port: 9090
 
 spring:
   application:
     name: order-service
-    
+
 eureka:
   instance:
     hostname: localhost
-    lease-renewal-interval-in-seconds: 3
-#    在模块中加入这个表示是新起的服务
     metadata-map:
-      version: new
+      version: current
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
-    registry-fetch-interval-seconds: 3
+    registryFetchIntervalSeconds: 1
+    leaseRenewalIntervalInSeconds: 1
+
+ribbon:
+  eager-load:
+    enabled: true
+  ConnectTimeout: 1000
+  ReadTimeout: 1000
+  OkToRetryOnAllOperations: true
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+
+feign:
+  hystrix:
+    enabled: false

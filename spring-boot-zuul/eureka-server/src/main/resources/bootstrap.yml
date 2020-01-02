@@ -3,6 +3,7 @@ server:
 eureka:
   instance:
     hostname: localhost
+    leaseExpirationDurationInSeconds: 2
   client:
     registerWithEureka: false
     fetchRegistry: false
@@ -10,6 +11,8 @@ eureka:
       defaultZone: http://peer1:8761/eureka/
   server:
     enableSelfPreservation: false
+    responseCacheUpdateIntervalMs: 100
+    evictionIntervalTimerInMs: 1000
 spring:
   cloud:
     config:
