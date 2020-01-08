@@ -1,5 +1,5 @@
 # spring-boot-demo
-spring boot demo 是一个用来深度学习并实战 spring boot 的项目，目前总共包含 **`14`** 个集成demo，已经完成 **`14`** 个。
+spring boot demo 是一个用来深度学习并实战 spring boot 的项目，目前总共包含 **`16`** 个集成demo，已经完成 **`16`** 个。
 
 该项目已成功集成batis-aop(`AOP自定义多数据源`)、multi-datasource-mybatis(`使用Mybatis集成多数据源`)、quartz(`定时任务`)、rabbitmq-access(`Rabbitmq手动确认模式`)、rabbitmq-availability(`RabbitMQ消息100%可靠性投递`)、redis(`单机||哨兵||集群||Lettuce`)、RocketMQ-demo(`RocketMQ，实现消息的发送和接收`)、RocketMQ-shop-project(`RocketMQ模拟电商网站购物`)、Spring Security(`实现动态权限的实现||Spring Cloud Security OAuth2`)、websocket(`服务端向客户端推送消息`)。
 
@@ -50,6 +50,7 @@ spring boot demo 是一个用来深度学习并实战 spring boot 的项目，�
 | [spring-boot-roctetmq-shop-project](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-roctetmq-shop-project) | 模拟电商网站购物场景中的【下单】和【支付】业务，使用MQ保证在下单失败后系统数据的完整性，通过MQ进行数据分发，提高系统处理性能。项目中技术选型为SpringBoot、Dubbo、Zookeeper、RocketMQ、Mysql等。                   |
 | [spring-boot-websocket-reamtime](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-websocket-reamtime) | 此 demo 主要演示了 Spring Boot 如何集成 WebSocket，实现后端主动往前端推送数据。网上大部分websocket的例子都是聊天室，本例主要是推送服务器状态信息。前端页面基于vue和element-ui实现。                   |
 | [spring-boot-zuul](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-zuul) | 此 demo 主要演示了 Spring Boot 如何改进zuul网关，实现对 zuul 进行改造实现动态路由与灰度发布。是生产和企业中非常实用的功能。                   |
+| [spring-boot-lock-redis](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-lock-redis) | 使用Spring Integration 完成分布式锁，全局锁目前可以提供以下四种实现:**Gemfire**、**JDBC**、**Redis**、**Zookeeper**.                  |
 
 ## 联系方式(加好友，备注来源)
 ![weix](vx.jpg)
