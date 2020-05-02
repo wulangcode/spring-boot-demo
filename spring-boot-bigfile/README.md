@@ -20,7 +20,7 @@
              e.printStackTrace();
              return;
          }
- 
+
          final long startTime = System.currentTimeMillis();
          cyclicBarrier = new CyclicBarrier(startEndPairs.size(), () -> {
              System.out.println("use time: " + (System.currentTimeMillis() - startTime));
@@ -81,3 +81,10 @@
 2. 其次,再设置若干个线程(如果一个够用,就一个。 数量最好不要超过系统的CPU个数,以下称为Processor线程) , 这些线程负责从上述队列中取出记录(对象),然后对记录中的数据进行校验,写入数据库。
 
 3. 最后，Reader线程读取完所以记录之后,要”通知”Processor线程 :等你处理完所有记录后,你可以停止了。这点,可以借助多线程设计模式中的Two- phase Termination模式来实现。其主要思想是为要停止的线程(目标线程,这里就是Processor线程)设置一个停止标志 ,并设置一个表示目标线程的工作任务数(这里值有多少条记录需要它处理)的变量。当目标线程侦测到其待处理的任务数为0 ,且线程停止标志已置为true的情况下,该线程就可以停止了。
+
+
+## 解决思路三：
+1. 缓存行对齐的概念：引用disruptor框架
+
+## 参考
+1. disruptor框架说明文档：https://tech.meituan.com/2016/11/18/disruptor.html
