@@ -52,6 +52,7 @@ spring boot demo 是一个用来深度学习并实战 spring boot 的项目，�
 | [spring-boot-zuul](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-zuul) | 此 demo 主要演示了 Spring Boot 如何改进zuul网关，实现对 zuul 进行改造实现动态路由与灰度发布。是生产和企业中非常实用的功能。                   |
 | [spring-boot-lock-redis](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-lock-redis) | 使用Spring Integration 完成分布式锁，全局锁目前可以提供以下四种实现:**Gemfire**、**JDBC**、**Redis**、**Zookeeper**.                  |
 | [spring-boot-bigfile](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-bigfile) | 对大文件进行快速读取，涉及到**多线程**、**零拷贝**技术。                  |
+| [spring-boot-spider](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-spider) | 用Java对网站进行爬取图片，并压缩成zip文件。                  |
 
 ## 联系方式(加好友，备注来源)
 ![weix](vx.jpg)
