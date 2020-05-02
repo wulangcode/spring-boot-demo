@@ -26,6 +26,7 @@
       <module>spring-boot-roctetmq-shop-project</module>
       <module>spring-boot-zuul</module>
       <module>spring-boot-lock-redis</module>
+      <module>spring-boot-spider</module>
     </modules>
 
     <name>wulang-boot-demo</name>
