@@ -3,12 +3,14 @@ package com.wulang.redis.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisNode;
+import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -31,8 +33,8 @@ public class RedisConfig {
     @Resource
     private RedisProperties redisProperties;
 
-//    @Value("${spring.redis.password}")
-//    private String password;
+    @Value("${spring.redis.password}")
+    private String password;
 
     /**
      * 配置 Redis 连接池信息
@@ -64,7 +66,7 @@ public class RedisConfig {
             nodeList.add(new RedisNode(hp[0], Integer.parseInt(hp[1])));
         }
         redisClusterConfiguration.setClusterNodes(nodeList);
-//        redisClusterConfiguration.setPassword(password);
+        redisClusterConfiguration.setPassword(RedisPassword.of(password));
         return redisClusterConfiguration;
     }
 

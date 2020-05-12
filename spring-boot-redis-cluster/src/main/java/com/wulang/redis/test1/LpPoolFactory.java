@@ -15,6 +15,18 @@ import java.util.Set;
  * @create 2019/11/27/21:54
  */
 public class LpPoolFactory implements PooledObjectFactory<JedisCluster> {
+
+
+    public static final int TIMEOUT = 3000; //连接超时时间
+    public static final int SO_TIMEOUT = 100; //间隔超时时间
+    public static final int MAX_ATTEMPTS = 100; //重试次数
+    public static final String REDIS_AUTH = "123456"; //Redis数据库访问密码
+    //
+    public static final int MAX_TOTAL = 1000; //最大连接数
+    public static final int MAX_IDEL = 200; // 空闲连接数
+    public static final int MAX_WAIT_MILLIS = 1000; //最大等待时间
+    public static final boolean TEST_ON_BORROW = true;// 进行连接测试，以保证返回的连接为可用连接
+
     /**
       * 功能描述：激活资源对象
       * 
@@ -48,14 +60,16 @@ public class LpPoolFactory implements PooledObjectFactory<JedisCluster> {
         // 最大允许等待时间，如果超过这个时间还未获取到连接，则会报JedisException异常：  
         // Could not get a resource from the pool  
         poolConfig.setMaxWaitMillis(1000);
+
         Set<HostAndPort> nodes = new LinkedHashSet<HostAndPort>();
-        nodes.add(new HostAndPort("148.70.34.49", 6379));
-        nodes.add(new HostAndPort("148.70.34.49", 6380));
-        nodes.add(new HostAndPort("148.70.34.49", 6381));
-        nodes.add(new HostAndPort("148.70.34.49", 6382));
-        nodes.add(new HostAndPort("148.70.34.49", 6383));
-        nodes.add(new HostAndPort("148.70.34.49", 6384));
-        JedisCluster JedisCluster = new JedisCluster(nodes, poolConfig);
+        nodes.add(new HostAndPort("122.152.197.167", 6379));
+        nodes.add(new HostAndPort("122.152.197.167", 6380));
+        nodes.add(new HostAndPort("122.152.197.167", 6381));
+        nodes.add(new HostAndPort("122.152.197.167", 6382));
+        nodes.add(new HostAndPort("122.152.197.167", 6383));
+        nodes.add(new HostAndPort("122.152.197.167", 6384));
+//        JedisCluster JedisCluster = new JedisCluster(nodes, poolConfig);
+        JedisCluster JedisCluster= new JedisCluster(nodes, TIMEOUT, SO_TIMEOUT, MAX_ATTEMPTS, REDIS_AUTH, poolConfig);
         return new DefaultPooledObject<JedisCluster>(JedisCluster);
     }
 
