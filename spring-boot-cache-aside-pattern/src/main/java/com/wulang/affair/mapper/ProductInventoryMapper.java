@@ -2,6 +2,7 @@ package com.wulang.affair.mapper;
 
 import com.wulang.affair.model.ProductInventory;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * 库存数量Mapper
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
  * @author wulang
  * @create 2020/5/13/20:32
  */
+@Repository
 public interface ProductInventoryMapper {
     /**
      * 更新库存数量

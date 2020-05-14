@@ -3,6 +3,8 @@ package com.wulang.affair.thread;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.wulang.affair.request.Request;
 import com.wulang.affair.request.RequestQueue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.*;
 
@@ -13,15 +15,11 @@ import java.util.concurrent.*;
  * @create 2020/5/13/7:39
  */
 public class RequestProcessorThreadPool {
-
-    // 在实际项目中，你设置线程池大小是多少，每个线程监控的那个内存队列的大小是多少
-    // 都可以做到一个外部的配置文件中
-    // 我们这了就给简化了，直接写死了，好吧
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestProcessorThreadPool.class);
 
     /**
      * 线程池
      */
-//    private ExecutorService threadPool = Executors.newFixedThreadPool(10);
     private ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
         .setNameFormat("Rx-MSG-%d").build();
     private ExecutorService threadPool = new ThreadPoolExecutor(10, 10,
@@ -34,6 +32,7 @@ public class RequestProcessorThreadPool {
          * 初始化时就将线程池填满
          */
         for (int i = 0; i < 10; i++) {
+            LOGGER.info("===========日志===========: 初始化线程，" + Thread.currentThread().getName());
             ArrayBlockingQueue<Request> queue = new ArrayBlockingQueue<Request>(100);
             requestQueue.addQueue(queue);
             threadPool.submit(new RequestProcessorThread(queue));

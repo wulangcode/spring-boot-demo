@@ -3,6 +3,8 @@ package com.wulang.affair.service.impl;
 import com.wulang.affair.request.Request;
 import com.wulang.affair.request.RequestQueue;
 import com.wulang.affair.service.RequestAsyncProcessService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -15,6 +17,9 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 @Service("requestAsyncProcessService")
 public class RequestAsyncProcessServiceImpl implements RequestAsyncProcessService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestAsyncProcessServiceImpl.class);
+
 
     @Override
     public void process(Request request) {
@@ -46,7 +51,7 @@ public class RequestAsyncProcessServiceImpl implements RequestAsyncProcessServic
         // 所以任何一个商品id都会被固定路由到同样的一个内存队列中去的
         int index = (requestQueue.queueSize() - 1) & hash;
 
-        System.out.println("===========日志===========: 路由内存队列，商品id=" + productId + ", 队列索引=" + index);
+        LOGGER.info("===========日志===========: 路由内存队列，商品id=" + productId + ", 队列索引=" + index);
 
         return requestQueue.getQueue(index);
     }

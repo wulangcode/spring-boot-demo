@@ -1,5 +1,6 @@
 package com.wulang.affair.controller;
 
+import com.wulang.affair.dao.RedisDAO;
 import com.wulang.affair.model.ProductInventory;
 import com.wulang.affair.request.ProductInventoryCacheRefreshRequest;
 import com.wulang.affair.request.ProductInventoryDBUpdateRequest;
@@ -9,9 +10,7 @@ import com.wulang.affair.service.RequestAsyncProcessService;
 import com.wulang.affair.vo.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -19,22 +18,27 @@ import javax.annotation.Resource;
  * @author wulang
  * @create 2020/5/13/21:15
  */
-@Controller
+@RestController
+@RequestMapping("/product")
 public class ProductInventoryController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductInventoryController.class);
+
+    static String INVENTORY = "product:inventory:";
 
     @Resource
     private RequestAsyncProcessService requestAsyncProcessService;
     @Resource
     private ProductInventoryService productInventoryService;
+    @Resource
+    private RedisDAO redisDAO;
 
     /**
      * 更新商品库存  写请求
      */
-    @RequestMapping("/updateProductInventory")
+    @PostMapping("/updateProductInventory")
     @ResponseBody
-    public Response updateProductInventory(ProductInventory productInventory) {
+    public Response updateProductInventory(@RequestBody ProductInventory productInventory) {
         LOGGER.info("===========日志===========: 接收到更新商品库存的请求，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
         Response response = null;
 
@@ -54,13 +58,11 @@ public class ProductInventoryController {
     /**
      * 获取商品库存  读请求
      */
-    @RequestMapping("/getProductInventory")
+    @GetMapping("/getProductInventory/{id}")
     @ResponseBody
-    public ProductInventory getProductInventory(Integer productId) {
-//        System.out.println("===========日志===========: 接收到一个商品库存的读请求，商品id=" + productId);
+    public ProductInventory getProductInventory(@PathVariable("id") Integer productId) {
         LOGGER.info("===========日志===========: 接收到一个商品库存的读请求，商品id=" + productId);
         ProductInventory productInventory = null;
-
         try {
             Request request = new ProductInventoryCacheRefreshRequest(
                 productId, productInventoryService, false);
@@ -99,7 +101,6 @@ public class ProductInventoryController {
                     waitTime = endTime - startTime;
                 }
             }
-
             // 直接尝试从数据库中读取数据
             productInventory = productInventoryService.findProductInventory(productId);
             if(productInventory != null) {

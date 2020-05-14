@@ -4,6 +4,8 @@ import com.wulang.affair.request.ProductInventoryCacheRefreshRequest;
 import com.wulang.affair.request.ProductInventoryDBUpdateRequest;
 import com.wulang.affair.request.Request;
 import com.wulang.affair.request.RequestQueue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -17,6 +19,8 @@ import java.util.concurrent.Callable;
  */
 public class RequestProcessorThread implements Callable<Boolean> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestProcessorThread.class);
+
     /**
      * 自己监控的内存队列
      */
@@ -28,6 +32,7 @@ public class RequestProcessorThread implements Callable<Boolean> {
 
     @Override
     public Boolean call() throws Exception {
+        LOGGER.info("当前线程名字:" + Thread.currentThread().getName());
         try {
             while(true) {
                 // ArrayBlockingQueue
@@ -46,7 +51,7 @@ public class RequestProcessorThread implements Callable<Boolean> {
                     } else if(request instanceof ProductInventoryCacheRefreshRequest) {
                         Boolean flag = flagMap.get(request.getProductId());
 
-                        // 如果flag是null
+                        // 如果flag是null,前面还没有读请求积压
                         if(flag == null) {
                             flagMap.put(request.getProductId(), false);
                         }
@@ -64,8 +69,7 @@ public class RequestProcessorThread implements Callable<Boolean> {
                         }
                     }
                 }
-
-                System.out.println("===========日志===========: 工作线程处理请求，商品id=" + request.getProductId());
+                LOGGER.info("===========日志===========: 工作线程处理请求，商品id=" + request.getProductId());
                 // 执行这个request操作
                 request.process();
 

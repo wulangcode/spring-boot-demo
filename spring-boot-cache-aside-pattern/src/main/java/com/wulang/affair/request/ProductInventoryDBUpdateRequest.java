@@ -2,6 +2,8 @@ package com.wulang.affair.request;
 
 import com.wulang.affair.model.ProductInventory;
 import com.wulang.affair.service.ProductInventoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 产品库存数据库更新请求
@@ -20,6 +22,8 @@ import com.wulang.affair.service.ProductInventoryService;
  */
 public class ProductInventoryDBUpdateRequest implements Request {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductInventoryDBUpdateRequest.class);
+
     /**
      * 商品库存
      */
@@ -37,15 +41,15 @@ public class ProductInventoryDBUpdateRequest implements Request {
 
     @Override
     public void process() {
-        System.out.println("===========日志===========: 数据库更新请求开始执行，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
+        LOGGER.info("===========日志===========: 数据库更新请求开始执行，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
         // 删除redis中的缓存
         productInventoryService.removeProductInventoryCache(productInventory);
         // 为了模拟演示先删除了redis中的缓存，然后还没更新数据库的时候，读请求过来了，这里可以人工sleep一下
-//		try {
-//			Thread.sleep(20000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
         // 修改数据库中的库存
         productInventoryService.updateProductInventory(productInventory);
     }

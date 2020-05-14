@@ -13,5 +13,5 @@ server:
       directory: logs
       enabled: true
     basedir: .
-
+  port: 9000
 
