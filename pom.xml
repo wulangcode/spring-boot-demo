@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
+      <module>spring-boot-cache-aside-pattern</module>
       <module>spring-boot-batis-aop</module>
       <module>spring-boot-multi-datasource-mybatis</module>
       <module>spring-boot-bigfile</module>
