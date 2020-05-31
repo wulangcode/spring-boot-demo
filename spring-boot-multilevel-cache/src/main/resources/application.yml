@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: 123456
+    url: jdbc:mysql://122.152.197.167:3306/test?useSSL=false&useUnicode=true
+    username: root
+
+logging:
+  config: classpath:log4j2.xml
+server:
+  tomcat:
+    accesslog:
+      directory: logs
+      enabled: true
+    basedir: .
+  port: 19000
+

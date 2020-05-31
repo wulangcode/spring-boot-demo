@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wulang.multievel.mapper.ProductInventoryMapper">
+
+  <update id="updateProductInventory" parameterType="com.wulang.multievel.model.ProductInventory">
+		UPDATE product_inventory SET inventory_cnt=#{inventoryCnt} WHERE product_id=#{productId}
+  	</update>
+
+  <select id="findProductInventory" resultType="com.wulang.multievel.model.ProductInventory">
+  		SELECT product_id AS "productId",inventory_cnt AS "inventoryCnt" FROM product_inventory WHERE product_id=#{productId}
+  	</select>
+
+</mapper>
