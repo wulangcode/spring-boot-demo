@@ -69,7 +69,7 @@ public class RequestProcessorThread implements Callable<Boolean> {
                         }
                     }
                 }
-                LOGGER.info("===========日志===========: 工作线程处理请求，商品id=" + request.getProductId());
+                LOGGER.info("工作线程处理请求，商品id=" + request.getProductId());
                 // 执行这个request操作
                 request.process();
 

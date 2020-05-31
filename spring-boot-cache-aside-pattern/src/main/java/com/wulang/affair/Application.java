@@ -1,6 +1,7 @@
 package com.wulang.affair;
 
-import com.wulang.affair.listener.InitListener;
+import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
+import com.wulang.affair.filter.HystrixRequestContextFilter;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -8,7 +9,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -102,17 +104,37 @@ public class Application {
         return jedisCluster;
     }
 
+//    /**
+//     * 注册监听器
+//     *
+//     * @return
+//     */
+//    @Bean
+//    public ServletListenerRegistrationBean servletListenerRegistrationBean() {
+//        ServletListenerRegistrationBean servletListenerRegistrationBean =
+//            new ServletListenerRegistrationBean();
+//        servletListenerRegistrationBean.setListener(new InitListener());
+//        return servletListenerRegistrationBean;
+//    }
+
+    @Bean
+    public ServletRegistrationBean indexServletRegistration() {
+        ServletRegistrationBean registration = new ServletRegistrationBean(new HystrixMetricsStreamServlet());
+        registration.addUrlMappings("/hystrix.stream");
+        return registration;
+    }
+
     /**
-     * 注册监听器
+     * HystrixRequestContext
      *
      * @return
      */
     @Bean
-    public ServletListenerRegistrationBean servletListenerRegistrationBean() {
-        ServletListenerRegistrationBean servletListenerRegistrationBean =
-            new ServletListenerRegistrationBean();
-        servletListenerRegistrationBean.setListener(new InitListener());
-        return servletListenerRegistrationBean;
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(
+            new HystrixRequestContextFilter());
+        filterRegistrationBean.addUrlPatterns("/*");
+        return filterRegistrationBean;
     }
 
     public static void main(String[] args) {

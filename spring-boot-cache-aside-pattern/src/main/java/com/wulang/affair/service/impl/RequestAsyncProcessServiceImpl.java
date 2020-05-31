@@ -51,7 +51,7 @@ public class RequestAsyncProcessServiceImpl implements RequestAsyncProcessServic
         // 所以任何一个商品id都会被固定路由到同样的一个内存队列中去的
         int index = (requestQueue.queueSize() - 1) & hash;
 
-        LOGGER.info("===========日志===========: 路由内存队列，商品id=" + productId + ", 队列索引=" + index);
+        LOGGER.info("路由内存队列，商品id=" + productId + ", 队列索引=" + index);
 
         return requestQueue.getQueue(index);
     }

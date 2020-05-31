@@ -1,10 +1,13 @@
 package com.wulang.affair.model;
 
+import lombok.Data;
+
 /**
  * 测试用户Model类
  * @author Administrator
  *
  */
+@Data
 public class User {
 
 	/**
@@ -15,20 +18,4 @@ public class User {
 	 * 测试用户年龄
 	 */
 	private Integer age;
-
-	// 按住左shift+左alt+s，就可以自动弹出一个对话框
-
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Integer getAge() {
-		return age;
-	}
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
 }

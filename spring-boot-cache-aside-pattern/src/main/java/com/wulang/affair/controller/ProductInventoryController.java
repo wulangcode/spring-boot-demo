@@ -39,7 +39,7 @@ public class ProductInventoryController {
     @PostMapping("/updateProductInventory")
     @ResponseBody
     public Response updateProductInventory(@RequestBody ProductInventory productInventory) {
-        LOGGER.info("===========日志===========: 接收到更新商品库存的请求，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
+        LOGGER.info("接收到更新商品库存的请求，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
         Response response = null;
 
         try {
@@ -61,7 +61,7 @@ public class ProductInventoryController {
     @GetMapping("/getProductInventory/{id}")
     @ResponseBody
     public ProductInventory getProductInventory(@PathVariable("id") Integer productId) {
-        LOGGER.info("===========日志===========: 接收到一个商品库存的读请求，商品id=" + productId);
+        LOGGER.info("接收到一个商品库存的读请求，商品id=" + productId);
         ProductInventory productInventory = null;
         try {
             Request request = new ProductInventoryCacheRefreshRequest(
@@ -76,21 +76,21 @@ public class ProductInventoryController {
 
             // 等待超过200ms没有从缓存中获取到结果
             while(true) {
-//				if(waitTime > 25000) {
-//					break;
-//				}
+				if(waitTime > 25000) {
+					break;
+				}
 
                 // 一般公司里面，面向用户的读请求控制在200ms就可以了
-                if(waitTime > 200) {
-                    break;
-                }
+//                if(waitTime > 200) {
+//                    break;
+//                }
 
                 // 尝试去redis中读取一次商品库存的缓存数据
                 productInventory = productInventoryService.getProductInventoryCache(productId);
 
                 // 如果读取到了结果，那么就返回
                 if(productInventory != null) {
-                    LOGGER.info("===========日志===========: 在200ms内读取到了redis中的库存缓存，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
+                    LOGGER.info("在200ms内读取到了redis中的库存缓存，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
                     return productInventory;
                 }
 

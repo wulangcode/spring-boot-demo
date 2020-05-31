@@ -41,7 +41,7 @@ public class ProductInventoryDBUpdateRequest implements Request {
 
     @Override
     public void process() {
-        LOGGER.info("===========日志===========: 数据库更新请求开始执行，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
+        LOGGER.info("数据库更新请求开始执行，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
         // 删除redis中的缓存
         productInventoryService.removeProductInventoryCache(productInventory);
         // 为了模拟演示先删除了redis中的缓存，然后还没更新数据库的时候，读请求过来了，这里可以人工sleep一下

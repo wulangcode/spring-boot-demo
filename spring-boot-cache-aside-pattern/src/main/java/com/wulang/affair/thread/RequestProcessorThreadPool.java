@@ -32,7 +32,7 @@ public class RequestProcessorThreadPool {
          * 初始化时就将线程池填满
          */
         for (int i = 0; i < 10; i++) {
-            LOGGER.info("===========日志===========: 初始化线程，" + Thread.currentThread().getName());
+            LOGGER.info("初始化线程，" + Thread.currentThread().getName());
             ArrayBlockingQueue<Request> queue = new ArrayBlockingQueue<Request>(100);
             requestQueue.addQueue(queue);
             threadPool.submit(new RequestProcessorThread(queue));

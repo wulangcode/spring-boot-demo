@@ -19,7 +19,7 @@ public class InitListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        LOGGER.info("===========日志===========: 线程池初始化开始");
+        LOGGER.info("线程池初始化开始");
         // 初始化工作线程池和内存队列
         RequestProcessorThreadPool.init();
     }

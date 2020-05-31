@@ -40,10 +40,10 @@ public class ProductInventoryCacheRefreshRequest implements Request {
 
     @Override
     public void process() {
-        LOGGER.info("===========日志===========: 从数据库中查询最新的商品库存数量，商品id=" + productId);
+        LOGGER.info("从数据库中查询最新的商品库存数量，商品id=" + productId);
         // 从数据库中查询最新的商品库存数量
         ProductInventory productInventory = productInventoryService.findProductInventory(productId);
-        LOGGER.info("===========日志===========: 将最新的商品库存数量，刷新到redis缓存中去，商品id=" + productId);
+        LOGGER.info("将最新的商品库存数量，刷新到redis缓存中去，商品id=" + productId);
         // 将最新的商品库存数量，刷新到redis缓存中去
         productInventoryService.setProductInventoryCache(productInventory);
     }

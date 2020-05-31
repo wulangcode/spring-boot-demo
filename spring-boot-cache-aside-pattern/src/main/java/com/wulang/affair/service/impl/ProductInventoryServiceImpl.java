@@ -29,14 +29,14 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     @Override
     public void updateProductInventory(ProductInventory productInventory) {
         productInventoryMapper.updateProductInventory(productInventory);
-        LOGGER.info("===========日志===========: 已修改数据库中的库存，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
+        LOGGER.info("已修改数据库中的库存，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
     }
 
     @Override
     public void removeProductInventoryCache(ProductInventory productInventory) {
         String key = INVENTORY + productInventory.getProductId();
         RedisClusterUtils.delString(key);
-        LOGGER.info("===========日志===========: 已删除redis中的缓存，key=" + key);
+        LOGGER.info("已删除redis中的缓存，key=" + key);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
         String key = INVENTORY + productInventory.getProductId();
         String s = RedisClusterUtils.setString(key, String.valueOf(productInventory.getInventoryCnt()));
         System.out.println(s);
-        LOGGER.info("===========日志===========: 已更新商品库存的缓存，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt() + ", key=" + key);
+        LOGGER.info("已更新商品库存的缓存，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt() + ", key=" + key);
     }
 
     /**
@@ -71,19 +71,18 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
      */
     @Override
     public ProductInventory getProductInventoryCache(Integer productId) {
-//        Long inventoryCnt = 0L;
-//
-//        String key = INVENTORY + productId;
-//        String result = RedisClusterUtils.getString(key);
-//        System.out.println(result);
-//        if (result != null && !"".equals(result)) {
-//            try {
-//                inventoryCnt = Long.valueOf(result);
-//                return new ProductInventory(productId, inventoryCnt);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+        Long inventoryCnt = 0L;
+
+        String key = INVENTORY + productId;
+        String result = RedisClusterUtils.getString(key);
+        if (result != null && !"".equals(result)) {
+            try {
+                inventoryCnt = Long.valueOf(result);
+                return new ProductInventory(productId, inventoryCnt);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         return null;
     }
