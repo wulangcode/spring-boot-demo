@@ -1,5 +1,6 @@
 package com.wulang.spider.service;
 
+import com.wulang.spider.pojo.Content;
 import com.wulang.spider.utils.Result;
 import com.wulang.spider.utils.ZipUtil;
 import org.jsoup.Connection;
@@ -375,6 +376,35 @@ public class SpiderPictureService {
             e.printStackTrace();
         }
         return bs;
+    }
+
+    public Result parseJD(String keywords) throws IOException {
+        String url = "https://search.jd.com/Search?keyword=" + keywords;
+        //解析网页。Jsoup返回的Document就是游览器的Document对象
+        Document document = Jsoup.parse(new URL(url), 30000);
+        String html = document.html();
+        LOG.info("html为：{}", html);
+        //所有在Js中使用的方法，在这里都能用
+        Element element = document.getElementById("J_goodsList");
+        //获取所有的 li 元素
+        Elements elements = element.getElementsByTag("li");
+        for (Element el : elements) {
+            //关于图片非常多的网站，所有的图片都是懒加载
+            // source-data-lazy-img
+            //图片
+            String img = el.getElementsByTag("img").eq(0).attr("source-data-lazy-img");
+            //价格
+            String price = el.getElementsByClass("p-price").eq(0).text();
+            //标题
+            String title = el.getElementsByClass("p-name").eq(0).text();
+            Content content = new Content();
+            content.setImg(img);
+            content.setPrice(price);
+            content.setTitle(title);
+            LOG.info("爬取京东搜索关键词为：{}，查询结果返回为：{}", keywords, content.toString());
+            //TODO 剩下就是自己的业务逻辑
+        }
+        return new Result(0, "爬取成功");
     }
 }
 

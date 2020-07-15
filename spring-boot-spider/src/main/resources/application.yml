@@ -2,3 +2,8 @@ server:
   port: 8099
   servlet:
     context-path: /wulang
+spring:
+  security:
+    user:
+      name: wulang
+      password: 123456

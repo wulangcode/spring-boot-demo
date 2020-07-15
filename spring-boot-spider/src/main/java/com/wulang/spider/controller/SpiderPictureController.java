@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author wulang
@@ -29,6 +30,15 @@ public class SpiderPictureController {
     })
     @GetMapping(value = "/downloadSpiderPicture")
     public Result downloadSpiderPicture(String spiderPictureURL, HttpServletResponse response) {
-        return spiderPictureService.downloadSpiderPictureSemaphore(spiderPictureURL,response);
+        return spiderPictureService.downloadSpiderPictureSemaphore(spiderPictureURL, response);
+    }
+
+    @ApiOperation(value = "爬取京东图片.wl")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "keywords", value = "输入查询的数据", required = true, dataType = "String", paramType = "query"),
+    })
+    @GetMapping(value = "/parseJD")
+    public Result parseJD(String keywords, HttpServletResponse response) throws IOException {
+        return spiderPictureService.parseJD(keywords);
     }
 }
