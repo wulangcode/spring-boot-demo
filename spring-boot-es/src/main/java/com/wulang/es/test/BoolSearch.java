@@ -29,6 +29,15 @@ public class BoolSearch {
     String index = "sms-logs-index";
     String type = "sms-logs-type";
 
+    /**
+     * minimum_should_match：
+     * 参数指定should返回的文档必须匹配的子句的数量或百分比。如果bool查询包含至少一个should子句，而没有must或 filter子句，则默认值为1。
+     * 否则，默认值为0
+     *
+     * matchPhrasePrefixQuery：短语前缀搜索
+     * matchPhraseQuery：短语搜索 或指定分词器analyzer standrd
+     * @throws IOException
+     */
     @Test
     public void boolSearch() throws IOException {
 
