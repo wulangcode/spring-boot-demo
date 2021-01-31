@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: bullet
+  cloud:
+    config:
+      uri: http://localhost:1026/
+      profile: dev
+      label: master
+#logging:
+#  level:
+#    ROOT: DEBUG
+#  instance:
+#    instanceId: ${spring.application.name):${random.int}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+

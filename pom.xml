@@ -30,6 +30,7 @@
     <module>spring-boot-lock-redis</module>
     <module>spring-boot-spider</module>
     <module>spring-boot-es</module>
+    <module>spring-boot-gateway-websocket</module>
   </modules>
 
   <name>wulang-boot-demo</name>
