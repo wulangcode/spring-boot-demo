@@ -31,6 +31,7 @@
     <module>spring-boot-spider</module>
     <module>spring-boot-es</module>
     <module>spring-boot-gateway-websocket</module>
+      <module>spring-boot-img-export</module>
   </modules>
 
   <name>wulang-boot-demo</name>

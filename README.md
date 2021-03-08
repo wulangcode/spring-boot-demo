@@ -54,6 +54,7 @@ spring boot demo 是一个用来深度学习并实战 spring boot 的项目，�
 | [spring-boot-bigfile](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-bigfile) | 对大文件进行快速读取，涉及到**多线程**、**零拷贝**技术。                  |
 | [spring-boot-spider](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-spider) | 用Java对网站进行爬取图片，并压缩成zip文件。                   |
 | [spring-boot-getway-websocket](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-gateway-websocket) | 连接通过网关转发websocket请求，待完成事项为加入用户鉴权                  |
+| [spring-boot-img-export](https://github.com/sanliangitch/spring-boot-demo/tree/master/spring-boot-img-export) | 读取Excel中的图片，因目前easyexcel暂不支持读取图片，所以抽取了一个工具类。                  |
 
 ## 联系方式(加好友，备注来源)
 ![weix](vx.jpg)
