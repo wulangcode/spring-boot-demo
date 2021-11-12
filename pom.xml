@@ -33,6 +33,7 @@
     <module>spring-boot-gateway-websocket</module>
     <module>spring-boot-img-export</module>
     <module>spring-boot-rename-table</module>
+    <module>spring-boot-clickhouse-read-bitmap</module>
   </modules>
 
   <name>wulang-boot-demo</name>
