@@ -34,6 +34,7 @@
     <module>spring-boot-img-export</module>
     <module>spring-boot-rename-table</module>
     <module>spring-boot-clickhouse-read-bitmap</module>
+      <module>spring-boot-pg-bitmap</module>
   </modules>
 
   <name>wulang-boot-demo</name>

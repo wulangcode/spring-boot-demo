@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wulang.pg.mapper.PgMapper">
+
+  <resultMap id="BaseResultMap" type="com.wulang.pg.pojo.T1">
+    <result column="id" property="id" jdbcType="INTEGER"/>
+    <result column="bitmap" property="bitmap" jdbcType="BLOB" javaType="org.roaringbitmap.RoaringBitmap"
+            typeHandler="com.wulang.pg.config.BitMapTypeHandler"/>
+  </resultMap>
+
+  <select id="list" resultMap="BaseResultMap">
+    select id, bitmap::bytea
+    from t1
+  </select>
+
+  <insert id="insTest" parameterType="com.wulang.pg.pojo.T1">
+    insert into t1 (id, bitmap)
+    values (#{id,jdbcType=INTEGER},
+            #{bitmap, jdbcType=BLOB,typeHandler=com.wulang.pg.config.BitMapTypeHandler}::bytea::roaringbitmap)
+  </insert>
+</mapper>

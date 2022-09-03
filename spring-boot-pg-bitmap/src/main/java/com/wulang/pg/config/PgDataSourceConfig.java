@@ -1,4 +1,4 @@
-package com.wulang.bitmap.config;
+package com.wulang.pg.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
@@ -17,44 +17,45 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import javax.sql.DataSource;
 
 /**
- * @author Administrator
- */
+ * @author wulang
+ * @date 2022-09-03 19:23
+ **/
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "clickhouse.jdbc.datasource")
-@MapperScan(basePackages = {"com.wulang.bitmap.mapper.mapper"}, sqlSessionFactoryRef = "clickHouseSqlSessionFactoryBean")
-public class ClickHouseDataSourceConfig {
+@ConfigurationProperties(prefix = "pg.jdbc.datasource")
+@MapperScan(basePackages = {"com.wulang.bitmap.mapper.mapper"}, sqlSessionFactoryRef = "pgSqlSessionFactoryBean")
+public class PgDataSourceConfig {
 
-    @Value("${clickhouse.jdbc.datasource.username}")
+    @Value("${pg.jdbc.datasource.username}")
     private String username;
 
-    @Value("${clickhouse.jdbc.datasource.driver-class-name}")
+    @Value("${pg.jdbc.datasource.driver-class-name}")
     private String driverClassName;
 
-    @Value("${clickhouse.jdbc.datasource.password}")
+    @Value("${pg.jdbc.datasource.password}")
     private String password;
 
-    @Value("${clickhouse.jdbc.datasource.url}")
+    @Value("${pg.jdbc.datasource.url}")
     private String url;
 
-    @Value("${clickhouse.jdbc.datasource.type}")
+    @Value("${pg.jdbc.datasource.type}")
     private String type;
 
-    @Value("${clickhouse.jdbc.datasource.max-wait:10000}")
+    @Value("${pg.jdbc.datasource.max-wait:10000}")
     private long maxWait;
     /**
      * 最小连接池数量
      */
-    @Value("${clickhouse.jdbc.datasource.min-idle:2}")
+    @Value("${pg.jdbc.datasource.min-idle:2}")
     private int minIdle;
     /**
      * 最大连接数量
      */
-    @Value("${clickhouse.jdbc.datasource.max-active:20}")
+    @Value("${pg.jdbc.datasource.max-active:20}")
     private int maxActive;
 
-    @Bean(name = "clickHouseDataSource")
-    public DataSource clickhouseDataSource() throws Exception {
+    @Bean(name = "pgDataSource")
+    public DataSource pgDataSource() throws Exception {
         Class classes = Class.forName(type);
         DruidDataSource dataSource = (DruidDataSource) DataSourceBuilder
             .create()
@@ -73,14 +74,14 @@ public class ClickHouseDataSourceConfig {
         return dataSource;
     }
 
-    @Bean(name = "clickHouseSqlSessionFactoryBean")
-    public SqlSessionFactory clickHouseSqlSessionFactoryBean(@Qualifier("clickHouseDataSource") DataSource dataSource) throws Exception {
+    @Bean(name = "pgSqlSessionFactoryBean")
+    public SqlSessionFactory pgSqlSessionFactoryBean(@Qualifier("pgDataSource") DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean factory = new MybatisSqlSessionFactoryBean();
         factory.setDataSource(dataSource);
         factory.setTypeHandlers(new BitMapTypeHandler());
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        factory.setMapperLocations(resolver.getResources("classpath:mapper/clickhouse/*.xml"));
+        factory.setMapperLocations(resolver.getResources("classpath:mapper/pg/*.xml"));
         //开启驼峰命名转换
         factory.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
         return factory.getObject();
